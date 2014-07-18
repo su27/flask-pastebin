@@ -89,6 +89,7 @@ def new_paste():
     return render_template('new_paste.html', parent=parent)
 
 
+@app.route('/<int:paste_id>/')
 @app.route('/<int:paste_id>')
 def show_paste(paste_id):
     paste = Paste.query.options(db.eagerload('children')).get_or_404(paste_id)
