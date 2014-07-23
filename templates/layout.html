@@ -1,12 +1,12 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} | Flask Pastebin</title>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" media="screen and (max-width: 800px)"
-href="{{ url_for('static', filename='small.css') }}" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" media="screen and (max-width: 800px)"
+href="{{ url_for('static', filename='small.css') }}" />
 
 {#<script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
 <script type=text/javascript src="{{ url_for('static', filename='pastebin.js') }}"></script>
