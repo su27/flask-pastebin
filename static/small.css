@@ -2,3 +2,5 @@ pre {
     font-size: 18px;
     line-height: 1.8em;
 }
+
+.page         { margin: 50px auto; width: 100%; }
