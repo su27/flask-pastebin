@@ -3,3 +3,4 @@ Flask-OAuth
 Flask-SQLAlchemy
 Flask-Script
 juggernaut
+PyMySQL

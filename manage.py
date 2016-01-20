@@ -1,4 +1,4 @@
-from flask.ext.script import Manager
+from flask.ext.script import Manager, Server
 from pastebin import app, db
 
 
@@ -15,6 +15,8 @@ def initdb():
 def dropdb():
     """Drops all database tables."""
     db.drop_all()
+
+manager.add_command('server', Server(host='0.0.0.0', port=8000))
 
 
 if __name__ == '__main__':

@@ -5,3 +5,7 @@
 build
 dist
 .DS_Store
+.env
+env
+pastebin_uwsgi.ini
+config.cfg

@@ -1,4 +1,4 @@
 DEBUG=False
 SQLALCHEMY_DATABASE_URI='sqlite:///pastebin.db'
-SECRET_KEY='development-key'
+SECRET_KEY='dev-key'
 JUGGERNAUT_DRIVER='http://localhost:8080/application.js'
