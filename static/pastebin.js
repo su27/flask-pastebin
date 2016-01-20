@@ -1,11 +1,8 @@
 (function() {
   var global = this;
 
-  var jug = new Juggernaut();
-
   var lib = global.pastebin = {
     urlRoot : '/',
-    jug : jug,
 
     autoHideFlashes : function() {
       var flashes = $('p.flash:visible').hide();
@@ -38,19 +35,8 @@
       if (reply.author)
         msg.append($('<span></span>').text(' ' + reply.author))
       lib.flash(msg);
-    },
-
-    subscribePaste : function(pasteID) {
-      jug.subscribe('paste-replies:' + pasteID, function(data) {
-        lib.onNewReply(data, 'paste');
-      });
-    },
-
-    subscribeUser : function(userID) {
-      jug.subscribe('user-replies:' + userID, function(data) {
-        lib.onNewReply(data, 'user');
-      });
     }
+
   };
 
 

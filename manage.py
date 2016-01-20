@@ -16,7 +16,7 @@ def dropdb():
     """Drops all database tables."""
     db.drop_all()
 
-manager.add_command('server', Server(host='0.0.0.0', port=8000))
+manager.add_command('server', Server(host='0.0.0.0', port=9200))
 
 
 if __name__ == '__main__':

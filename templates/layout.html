@@ -1,25 +1,31 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} | Flask Pastebin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<script type=text/javascript src="{{ config.JUGGERNAUT_DRIVER }}"></script>
-<script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
+<link rel="stylesheet" media="screen and (max-width: 800px)"
+href="{{ url_for('static', filename='small.css') }}" />
+
+{#<script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
 <script type=text/javascript src="{{ url_for('static', filename='pastebin.js') }}"></script>
 <script type=text/javascript>
   pastebin.urlRoot = {{ request.url_root|tojson|safe }};
-{%- if g.user %}
-  pastebin.subscribeUser({{ g.user.id }});
-{%- endif %}
 </script>
+#}
 <div class=page>
   <h1>Flask Pastebin</h1>
   <ul class=nav>
     <li><a href="{{ url_for('new_paste') }}">New Paste</a>
+    {#
     {% if g.user %}
     <li><a href="{{ url_for('my_pastes') }}">My Pastes</a>
     <li><a href="{{ url_for('logout') }}">Sign out ({{ g.user.display_name }})</a>
     {% else %}
     <li><a href="{{ url_for('login') }}">Sign in with Facebook</a>
     {% endif %}
+    #}
   </ul>
   {% for message in get_flashed_messages() %}
     <p class=flash>{{ message }}
