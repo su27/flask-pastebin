@@ -12,8 +12,8 @@ dl            { overflow: auto; font-size: 14px; padding: 0 10px}
 dl dt         { font-weight: bold; min-width: 70px; float: left; padding-right: 15px;
                 clear: left; }
 dl dd         { float: left; margin: 0; padding: 0; }
-pre, textarea { font-family: 'Consolas', monospace; font-size: 16px;
-                background: #f4f4f4; padding: 10px; margin: 0; line-height: 1.6em;
+pre, textarea { font-family: 'Consolas', monospace; font-size: 14px;
+                background: #f4f4f4; padding: 10px; margin: 0; line-height: 1.4em;
                 word-break: break-word; white-space: pre-wrap;}
 textarea      { border: none; width: 100%; }
 .code, .flash { background: #f4f4f4; padding: 0; }
