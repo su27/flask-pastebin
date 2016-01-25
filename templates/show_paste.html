@@ -29,4 +29,13 @@
     {% endif %}
   </dl>
   <div class=code><pre>{{ paste.code }}</pre></div>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.1.0/styles/default.min.css">
+  <script src="//cdn.jsdelivr.net/highlight.js/9.1.0/highlight.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('pre').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+  </script>
 {% endblock %}

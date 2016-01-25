@@ -1,7 +1,6 @@
 from flask.ext.script import Manager, Server
 from pastebin import app, db
 
-
 manager = Manager(app)
 
 
