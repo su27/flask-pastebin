@@ -11,7 +11,9 @@
     <dd>{{ paste.pub_date.strftime('%Y-%m-%d @ %H:%M') }}
     <dt>Actions
     <dd>
-      <a href="{{ url_for('new_paste', reply_to=paste.id) }}">Reply</a>
+      {% if not paste.is_private %}
+        <a href="{{ url_for('new_paste', reply_to=paste.id) }}">Reply</a>
+      {% endif %}
       {%- if g.user and paste.user == g.user -%}
       , <a href="{{ url_for('delete_paste', paste_id=paste.id) }}">Delete</a>
       {% endif %}

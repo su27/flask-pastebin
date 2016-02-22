@@ -1,6 +1,7 @@
 from datetime import datetime
+from itsdangerous import Signer
 from flask import (Flask, request, url_for, redirect, g,
-        render_template, session)
+                   render_template, session, abort)
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
@@ -28,13 +29,15 @@ class Paste(db.Model):
     code = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    is_private = db.Column(db.Boolean)
     parent_id = db.Column(db.Integer, db.ForeignKey('paste.id'))
     parent = db.relationship('Paste', lazy=True, backref='children',
                              uselist=False, remote_side=[id])
 
-    def __init__(self, user, code, parent=None):
+    def __init__(self, user, code, parent=None, is_private=False):
         self.user = user
         self.code = code
+        self.is_private = is_private
         self.pub_date = datetime.utcnow()
         self.parent = parent
 
@@ -53,10 +56,14 @@ def new_paste():
     if reply_to is not None:
         parent = Paste.query.get(reply_to)
     if request.method == 'POST' and request.form['code']:
-        paste = Paste(g.user, request.form['code'], parent=parent)
+        is_private = bool(request.form.get('is_private'))
+        paste = Paste(g.user, request.form['code'], parent=parent,
+                      is_private=is_private)
         db.session.add(paste)
         db.session.commit()
-        return redirect(url_for('show_paste', paste_id=paste.id))
+        sign = Signer(app.secret_key, salt='jackson').sign(str(paste.id)) \
+            if is_private else None
+        return redirect(url_for('show_paste', paste_id=paste.id, s=sign))
     return render_template('new_paste.html', parent=parent)
 
 
@@ -64,5 +71,11 @@ def new_paste():
 @app.route('/<int:paste_id>')
 def show_paste(paste_id):
     paste = Paste.query.options(db.eagerload('children')).get_or_404(paste_id)
+    if paste.is_private:
+        try:
+            sign = request.args.get('s', '')
+            assert str(paste.id) == \
+                Signer(app.secret_key, salt='jackson').unsign(sign)
+        except:
+            abort(403)
     return render_template('show_paste.html', paste=paste)
-

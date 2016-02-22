@@ -1,13 +1,14 @@
 {% extends "layout.html" %}
 {% block title %}New Paste{% endblock %}
 {% block body %}
-<h2>New Paste
-  {%- if parent %}
-  - Reply to #{{ parent.id }}
-  {%- endif %}
-</h2>
-  <form action="" method=post>
-    <div class=code><textarea name=code cols=60 rows=12>{{ parent.code }}</textarea></div>
-    <p><input type=submit value="New Paste">
-  </form>
+<form action="" method=post>
+  <h2>New Paste
+    {%- if parent %}
+    - Reply to #{{ parent.id }}
+    {%- endif %}
+    <span class="chk-private"><input name="is_private" type="checkbox"/>Private</span>
+  </h2>
+  <div class=code><textarea name=code cols=60 rows=12>{{ parent.code }}</textarea></div>
+  <p><input type=submit value="New Paste">
+</form>
 {% endblock %}
